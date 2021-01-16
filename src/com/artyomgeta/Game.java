@@ -1,11 +1,11 @@
 package com.artyomgeta;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 import java.awt.*;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 
 import static com.artyomgeta.Helper.mouseIsOver;
 import static com.artyomgeta.Helper.splitTextByWords;
@@ -17,6 +17,7 @@ public class Game extends PApplet {
     String game = "Работа с микроскопом";
     Button button1, button2;
     int screen = SCREEN_MENU;
+    List<GameObject> objects = new ArrayList<> ();
 
     //Функция запуска
     public void settings() {
@@ -73,15 +74,33 @@ public class Game extends PApplet {
 
     //Рисуем экран игры
     private void drawScreenGame() {
-
+    	clearScreen();
+    	DraggableObject object = new DraggableObject(null, null);
+    	addObject(object);
     }
 
+    private <T extends GameObject> void addObject(T object) {
+    	objects.add(object);
+    	object.draw(object);
+    }
+    
+    //Очистить экран
+    private void clearScreen() {
+    	for (int i = 0; i < objects.size(); i++) {
+    		objects.remove(i);
+    	}
+    	fill(255);
+    	rect(0, 0, width, height);
+    }
+    
     //Слушаем клик мышки
     public void mouseClicked() {
         if (button2.mouseIsOver) {
 //            int result = JOptionPane.showConfirmDialog(null, "Вы уверены, что хотите выйти?", "Подтвердите", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 //            if (result == JOptionPane.YES_OPTION)
             exit();
+        } else if (button1.mouseIsOver) {
+        	screen = SCREEN_GAME;
         }
     }
 
@@ -99,7 +118,12 @@ public class Game extends PApplet {
             return x;
         }
 
-        public void setX(int x) {
+        public <T> void draw(T object) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void setX(int x) {
             this.x = x;
         }
 
@@ -229,13 +253,39 @@ public class Game extends PApplet {
         public boolean isMouseIsOver() {
             return mouseIsOver;
         }
-
+        
     }
 
     //Перетаскиваемый объект
     class DraggableObject extends GameObject {
-
+    	PImage[] images;
+    	Text text;
+    	
+    	public DraggableObject(PImage[] images, Text text) {
+    			this.images = images;
+    			this.text = text;
+    	}
+    	
+    	void draw() {
+    		fill(100);
+    		stroke(0);
+    		ellipse(x, y, width, height);
+    	}
+    	
     }
+    
+    
+   class Text extends GameObject {
+	   
+	   public Text(String text, int x, int y, int size, Color color) {
+		   
+		   textSize(size);
+		   fill(color.getRGB());
+		   text(text, x, y);
+		   
+	   }
+	   
+   }
 
     //Перетаскиваемый текст
     class DraggableText extends GameObject {
@@ -251,4 +301,5 @@ public class Game extends PApplet {
     class StaticText extends GameObject {
 
     }
+    
 }
