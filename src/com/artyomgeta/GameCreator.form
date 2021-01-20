@@ -29,17 +29,41 @@
             <properties/>
             <border type="none"/>
             <children>
-              <scrollpane id="3f539">
+              <splitpane id="8d50">
                 <constraints border-constraint="Center"/>
-                <properties/>
+                <properties>
+                  <orientation value="0"/>
+                </properties>
                 <border type="none"/>
                 <children>
-                  <component id="787b6" class="javax.swing.JTree" binding="tree1" default-binding="true">
-                    <constraints/>
+                  <scrollpane id="863c9">
+                    <constraints>
+                      <splitpane position="left"/>
+                    </constraints>
                     <properties/>
-                  </component>
+                    <border type="none"/>
+                    <children>
+                      <component id="2554d" class="javax.swing.JList" binding="list1" default-binding="true">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <scrollpane id="641df">
+                    <constraints>
+                      <splitpane position="right"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="a4916" class="javax.swing.JList" binding="list2" default-binding="true">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
                 </children>
-              </scrollpane>
+              </splitpane>
             </children>
           </grid>
           <grid id="a46e7" layout-manager="BorderLayout" hgap="0" vgap="0">
@@ -52,10 +76,12 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="1eb2f" class="javax.swing.JEditorPane" binding="editorPane1" default-binding="true">
+                  <grid id="2030f" layout-manager="BorderLayout" hgap="0" vgap="0">
                     <constraints/>
                     <properties/>
-                  </component>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
                 </children>
               </scrollpane>
             </children>
